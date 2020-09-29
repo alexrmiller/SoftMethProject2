@@ -83,23 +83,44 @@ public class AccountDatabase {
 		}
 	}
 	
-	//TO DO come up with algorithm with Maudiel
 	public void sortByDateOpen() {
-		
+		Account account = null;
+		for(int i=0;i<accounts.length;i++) {
+			for (int j=i;j<accounts.length;j++) {
+				if(accounts[i].getDateOpen().compareTo(accounts[j].getDateOpen())==-1) {
+					//switch the two
+					account=accounts[i];
+					accounts[i]=accounts[j];
+					accounts[j]=account;
+				}
+			}
+		}
 	}
 	
-	//TO DO come up with algorithm with Maudiel
 	private void sortByLastName() {
-		
+		Account account = null;
+		for(int i=0;i<accounts.length;i++) {
+			for (int j=i;j<accounts.length;j++) {
+				if(accounts[i].getProfile().getLastName().compareTo(accounts[j].getProfile().getLastName())==-1) {
+					//switch the two
+					account=accounts[i];
+					accounts[i]=accounts[j];
+					accounts[j]=account;
+				}
+			}
+		}
 	}
+	
 	private void printByDateOpen() {
 		sortByDateOpen();
 		printAccounts();
 	}
+	
 	private void printByLastName() {
-		sortByDateOpen();
+		sortByLastName();
 		printAccounts();
 	}
+	
 	private void printAccounts() {
 		for(int i=0; i<accounts.length;i++) {
 			System.out.println(accounts[i]);

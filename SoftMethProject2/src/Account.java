@@ -10,6 +10,14 @@ public abstract class Account {
 		this.dateOpen=dateOpen;
 	}
 	
+	public Profile getProfile() {
+		return this.holder;
+	}
+	
+	public Date getDateOpen() {
+		return this.dateOpen;
+	}
+	
 	public double getBalance() {
 		return this.balance;
 	}

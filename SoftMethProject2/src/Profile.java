@@ -8,6 +8,10 @@ public class Profile {
 		this.lname=l;
 	}
 	
+	public String getLastName() {
+		return this.lname;
+	}
+	
 	@Override
 	public String toString() {
 		return this.fname + this.lname;
