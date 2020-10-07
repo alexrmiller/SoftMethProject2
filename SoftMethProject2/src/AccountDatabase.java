@@ -28,7 +28,7 @@ public class AccountDatabase {
 	//adds the account
 	public boolean add(Account account) {
 		int location = find(account);
-		if(location!=-1) {
+		if(location==-1) {
 		//if found then add the account and grow if needed
 		if(this.size==accounts.length) {
 			grow();
@@ -95,6 +95,7 @@ public class AccountDatabase {
 				}
 			}
 		}
+		return;
 	}
 	
 	private void sortByLastName() {
@@ -109,21 +110,25 @@ public class AccountDatabase {
 				}
 			}
 		}
+		return;
 	}
 	
-	private void printByDateOpen() {
+	public void printByDateOpen() {
 		sortByDateOpen();
 		printAccounts();
+		return;
 	}
 	
-	private void printByLastName() {
+	public void printByLastName() {
 		sortByLastName();
 		printAccounts();
+		return;
 	}
 	
-	private void printAccounts() {
+	public void printAccounts() {
 		for(int i=0; i<accounts.length;i++) {
 			System.out.println(accounts[i]);
 		}
+		return;
 	}
 }
