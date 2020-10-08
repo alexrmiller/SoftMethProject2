@@ -1,9 +1,13 @@
+import java.text.DecimalFormat;
+
 /**
  * @author Maudiel Romero, Alex Miller
  *
  */
 public class MoneyMarket extends Account {
 	private int withdrawals;
+	
+	DecimalFormat df = new DecimalFormat("#.##");
 
 	/**
 	 * 
@@ -20,6 +24,10 @@ public class MoneyMarket extends Account {
 	public MoneyMarket(Profile holder) {
 		super.Account(holder);
 	}
+	
+	public void withdrawal2() {
+		this.withdrawals++;
+	}
 
 	/**
 	 * 
@@ -27,7 +35,8 @@ public class MoneyMarket extends Account {
 	 */
 	@Override
 	public double monthlyInterest() {
-		return this.getBalance() * .0065;
+		 String ret = df.format(this.getBalance() * .0065);
+		 return Double.parseDouble(ret);
 
 	}
 
@@ -38,7 +47,10 @@ public class MoneyMarket extends Account {
 	 */
 	@Override
 	public double monthlyFee() {
-		if (this.withdrawals > 6 || 2500 > super.getBalance()) {
+		if(this.withdrawals>6) {
+			return 12;
+		}
+		else if (2500 > super.getBalance()) {
 			return 12;
 		} else {
 			return 0;

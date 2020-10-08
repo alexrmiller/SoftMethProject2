@@ -1,3 +1,5 @@
+import java.text.DecimalFormat;
+
 /**
  * @authorMaudiel Romero , Alex Miller
  *
@@ -5,6 +7,7 @@
 public class Savings extends Account {
 	private boolean isLoyal;
 
+	DecimalFormat df = new DecimalFormat("#.##");
 	
 	public Savings(Profile holder) {
 		super.Account(holder);
@@ -29,10 +32,12 @@ public class Savings extends Account {
 	 */
 	@Override
 	public double monthlyInterest() {
-		if (this.isLoyal = false) {
-			return this.getBalance()*.0035;
+		if (this.isLoyal == false) {
+			String ret = df.format(this.getBalance() * .0035);
+			 return Double.parseDouble(ret);
 		} else {
-			return this.getBalance()*.0025;
+			String ret = df.format(this.getBalance() * .0025);
+			 return Double.parseDouble(ret);
 		}
 	}
 

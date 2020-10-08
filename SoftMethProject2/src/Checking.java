@@ -1,6 +1,9 @@
+import java.text.DecimalFormat;
 
 public class Checking extends Account {
 	private boolean directDeposit;
+	
+	DecimalFormat df = new DecimalFormat("#.##");
 
 	/**
 	 * 
@@ -25,8 +28,9 @@ public class Checking extends Account {
 	 * @return CheckingInterest refers to monthly interest
 	 */
 	@Override
-	public double monthlyInterest() {
-		return this.getBalance() * .0005;
+	public double monthlyInterest(){
+		String ret = df.format(this.getBalance() * .0005);
+		 return Double.parseDouble(ret);
 	}
 
 	/**
@@ -36,7 +40,10 @@ public class Checking extends Account {
 	 */
 	@Override
 	public double monthlyFee() {
-		if (this.directDeposit==true || 1500 > super.getBalance()) {
+		if (this.directDeposit==true) {
+			return 0;
+		}
+		else if(1500 > super.getBalance()) {
 			return 25;
 		} else {
 			return 0;

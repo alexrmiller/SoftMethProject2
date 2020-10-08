@@ -169,10 +169,13 @@ public class TransactionManager {
 		char type = arr[0].charAt(1);
 		String FirstName = arr[1];
 		String LastName = arr[2];
-		double 	Balance = Double.parseDouble(arr[3]);
+		double 	Bal = Double.parseDouble(arr[3]);
+		String temp = doubleBalance.format(Bal);
+		double Balance = Double.parseDouble(temp);
 		String[] Date = arr[4].split("/", 3);
 		boolean bool=false;
 		if(arr.length==6) {
+		boolCheck(arr);
 		bool = Boolean.parseBoolean(arr[5].toLowerCase());
 		}
 
@@ -298,6 +301,17 @@ public class TransactionManager {
 			run();
 		}
 		return;
+	}
+	
+	public void boolCheck(String[] arr) {
+		
+		String bool = arr[5].toLowerCase();
+		if(bool.equals("false")||bool.equals("true")) {
+			return;
+		}else {
+			System.out.println("Input data type mismatch.");
+			run();
+		}
 	}
 	
 }

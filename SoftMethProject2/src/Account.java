@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 
 public abstract class Account {
 	private Profile holder;
@@ -67,7 +68,7 @@ public abstract class Account {
 	 */
 	@Override
 	public String toString() {
-		return   this.holder.toString() + "* $" + this.balance + "*" + this.dateOpen.toString() ;
+		return   this.holder.toString() + "* $" + balance + "*" + this.dateOpen.toString() ;
 	}
 
 	/**

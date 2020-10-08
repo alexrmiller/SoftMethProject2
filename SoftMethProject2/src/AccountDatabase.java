@@ -1,8 +1,11 @@
+import java.text.DecimalFormat;
 
 public class AccountDatabase {
 
 	private Account[] accounts;
 	private int size;
+	
+	DecimalFormat df = new DecimalFormat("#.##");
 
 	public AccountDatabase() {
 		this.accounts = new Account[5];
@@ -79,6 +82,11 @@ public class AccountDatabase {
 		} else if (accounts[i].getBalance() < amount) {
 			return 1;
 		} else {
+			if(accounts[i] instanceof MoneyMarket) {
+				((MoneyMarket) accounts[i]).debit(amount);
+				((MoneyMarket) accounts[i]).withdrawal2();
+				return 0;
+			}
 			accounts[i].debit(amount);
 			return 0;
 		}
@@ -116,7 +124,7 @@ public class AccountDatabase {
 
 	public void printByDateOpen() {
 		if(size==0) {
-			System.out.println("Database is empty");
+			System.out.println("Database is empty.");
 			return;
 		}
 		sortByDateOpen();
@@ -125,7 +133,9 @@ public class AccountDatabase {
 			System.out.println(accounts[i].toString() +"\n");
 			System.out.println("-interest: $ " + accounts[i].monthlyInterest());
 			System.out.println("-fee: $ " + accounts[i].monthlyFee());
-			double newBalance = accounts[i].getBalance()-accounts[i].monthlyFee()+accounts[i].monthlyInterest();
+			double newBal = accounts[i].getBalance()-accounts[i].monthlyFee()+accounts[i].monthlyInterest();
+			String formatted = df.format(newBal);
+			double newBalance = Double.parseDouble(formatted);
 			accounts[i].setBalance(newBalance);
 			System.out.println("-new balance: $ " + newBalance + "\n");
 		}
@@ -135,7 +145,7 @@ public class AccountDatabase {
 
 	public void printByLastName() {
 		if(size==0) {
-			System.out.println("Database is empty");
+			System.out.println("Database is empty.");
 			return;
 		}
 		sortByLastName();
@@ -144,7 +154,11 @@ public class AccountDatabase {
 			System.out.println(accounts[i].toString() +"\n");
 			System.out.println("-interest: $ " + accounts[i].monthlyInterest());
 			System.out.println("-fee: $ " + accounts[i].monthlyFee());
-			System.out.println("-new balance: $ " + accounts[i].getBalance());
+			double newBal = accounts[i].getBalance()-accounts[i].monthlyFee()+accounts[i].monthlyInterest();
+			String formatted = df.format(newBal);
+			double newBalance = Double.parseDouble(formatted);
+			accounts[i].setBalance(newBalance);
+			System.out.println("-new balance: $ " + newBalance + "\n");
 		}
 		System.out.println("--end of printing--");
 		return;
