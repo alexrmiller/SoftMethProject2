@@ -1,9 +1,9 @@
 
-	/**
-	 * Our own date class, comparable to Date object
-	 * @author Maudiel Romero, Alex Miller
-	 *
-	 */
+/**
+ * Our own date class, comparable to Date object
+ * @author Maudiel Romero, Alex Miller
+ *
+ */
 import java.text.DecimalFormat;
 
 public class Date implements Comparable<Date> {
@@ -89,11 +89,13 @@ public class Date implements Comparable<Date> {
 			return false;
 		} else if (this.checkMatche() == false) {
 			return false;
-		} else if (this.month == 2 && this.day > 29) {
-			return false;
 		} else if (this.evenMonths() == true && this.day > 30) {
 			return false;
-		} else {
+		} else if (this.month == 2 && this.day > 28 && this.year % 4 != 0){
+			return false;
+		} else if (this.day > 29 && this.year % 4 == 0) {
+			return false;
+		}else {
 			return true;
 		}
 	}
