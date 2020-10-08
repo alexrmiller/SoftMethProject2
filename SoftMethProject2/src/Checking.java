@@ -1,3 +1,9 @@
+/**
+ * Checking class is an extended Account class
+ * 
+ * @authorMaudiel Romero , Alex Miller
+ *
+ */
 import java.text.DecimalFormat;
 
 public class Checking extends Account {
@@ -6,6 +12,7 @@ public class Checking extends Account {
 	DecimalFormat df = new DecimalFormat("#.##");
 
 	/**
+	 * Constructor for checking account
 	 * 
 	 * @param holder
 	 * @param balance
@@ -18,6 +25,11 @@ public class Checking extends Account {
 		this.directDeposit = directDeposit;
 	}
 	
+	/**
+	 * Constructor for checking account with only holder information
+	 * 
+	 * @param holder
+	 */
 	public Checking(Profile holder) {
 		super.Account(holder);
 	}
@@ -29,14 +41,14 @@ public class Checking extends Account {
 	 */
 	@Override
 	public double monthlyInterest(){
-		String ret = df.format(this.getBalance() * .0005);
+		String ret = df.format(this.getBalance() * (.0005/12));
 		 return Double.parseDouble(ret);
 	}
 
 	/**
-	 * Checks if account holds sufficient funds of >= 1500
+	 * Checks if account holds sufficient funds of >= 1500 or if directDeposit == true
 	 * 
-	 * @return 0 refers to balance is > than 1500 else return 25
+	 * @return 0 refers to balance is > 1500 or directDeposit == true else return 25
 	 */
 	@Override
 	public double monthlyFee() {
@@ -51,23 +63,13 @@ public class Checking extends Account {
 	}
 
 	/**
-	 * have the difference between Intrest and fee as once var.
+	 * prints out the Account formatted properly
 	 * 
-	 * @param profile
-	 * @return
+	 * @return if direct deposit "*Checking*" + super.toString() + "*direct deposit account*" ... if not "*Checking*" + super.toString() + "*"
 	 */
 	@Override
 	public String toString() {
 		return directDeposit ? "*Checking*" + super.toString() + "*direct deposit account*" : "*Checking*" + super.toString() + "*";
 	}
 	
-	/*
-	@Override
-	public boolean equals(Object obj) {
-		if(obj instanceof Checking) {
-			return super.equals(obj) && this.directDeposit == ((Checking) obj).directDeposit;
-		}
-		return false;
-	}
-	*/
 }

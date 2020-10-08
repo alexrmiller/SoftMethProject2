@@ -1,4 +1,6 @@
-/**
+	/**
+ 	 * Profile Class used to create Accounts
+ 	 * 
 	 * @author Maudiel Romero, Alex Miller
 	 *
 	 */
@@ -7,6 +9,7 @@ public class Profile {
 	private String lname;
 	
 	/**
+	 * Constructor for Profile
 	 * 
 	 * @param f
 	 * @param l 
@@ -15,11 +18,11 @@ public class Profile {
 		this.fname=f;
 		this.lname=l;
 	}
-	//should I make a full name 1 allocation in array? 
+
 	/**
 	 * Overrides Profile class to return first and last name together as one instance 
 	 * @param 
-	 * @return first name + ' ' + lastname refers to string output of func. Profile
+	 * @return fname + ' ' + lname refers to string output of func. Profile
 	 */
 	@Override
 	public String toString() {
@@ -34,19 +37,13 @@ public class Profile {
 		return (this.fname.equals(profile.fname) && this.lname.equals(profile.lname));
 	}
 	
-	//TO DO make comment
+	/**
+	 * getter method to retrieve Profile's last name
+	 * 
+	 * @return this.lname
+	 */
 	public String getLastName() {
 		return this.lname;
 	}
-	
-//	public static void main(String[] args) {
-//		// TODO Auto-generated method stub
-//		//Profiler();
-//		Profile object = new Profile();
-//		Profile object2 = new Profile();
-//		object.Profile("Maudiel", "Romero");
-//		object2.Profile("Maudiel", "Rom");
-//	    System.out.println(object2.equals(object));
-//	}
 
 }

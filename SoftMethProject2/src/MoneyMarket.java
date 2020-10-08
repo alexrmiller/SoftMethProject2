@@ -1,15 +1,18 @@
-import java.text.DecimalFormat;
-
 /**
+ * MoneyMarket class is an extended Account class
+ * 
  * @author Maudiel Romero, Alex Miller
  *
  */
+import java.text.DecimalFormat;
+
 public class MoneyMarket extends Account {
 	private int withdrawals;
 	
 	DecimalFormat df = new DecimalFormat("#.##");
 
 	/**
+	 * Constructor for MoneyMarket Account
 	 * 
 	 * @param holder
 	 * @param balance
@@ -21,21 +24,31 @@ public class MoneyMarket extends Account {
 		this.withdrawals = withdrawals;
 	}
 
+	/**
+	 * Constructor for MoneyMarket Account using only holder
+	 * 
+	 * @param holder
+	 */
 	public MoneyMarket(Profile holder) {
 		super.Account(holder);
 	}
 	
+	/**
+	 * setter to increase the MoneyMarket's withdrawal amount by 1
+	 * @return
+	 */
 	public void withdrawal2() {
 		this.withdrawals++;
+		return;
 	}
 
 	/**
 	 * 
-	 * @return monthly refers to interest double 0.0002083
+	 * @return ret refers to interest double 0.0002083
 	 */
 	@Override
 	public double monthlyInterest() {
-		 String ret = df.format(this.getBalance() * .0065);
+		 String ret = df.format(this.getBalance() * (.0065/12));
 		 return Double.parseDouble(ret);
 
 	}
@@ -58,22 +71,11 @@ public class MoneyMarket extends Account {
 	}
 
 	/**
-	 * 
-	 * @param profile
-	 * @return
+	 * @return "*Money Market*" + super.toString() + "*" + withdrawals + " withdrawals*"
 	 */
 	@Override
 	public String toString() {
 		return "*Money Market*" + super.toString() + "*" + withdrawals + " withdrawals*";
 	}
 
-	/*
-	@Override
-	public boolean equals(Object obj) {
-		if(obj instanceof MoneyMarket) {
-			return super.equals(obj) && this.withdrawals == ((MoneyMarket) obj).withdrawals;
-		}
-		return false;
-	}
-	*/
 }

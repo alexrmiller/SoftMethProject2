@@ -1,3 +1,9 @@
+/**
+ * Account class is an object class that extends to other Account classes.
+ * 
+ * @authorMaudiel Romero , Alex Miller
+ *
+ */
 import java.text.DecimalFormat;
 
 public abstract class Account {
@@ -6,6 +12,7 @@ public abstract class Account {
 	private Date dateOpen;
 
 	/**
+	 * constructor for Account Object
 	 * 
 	 * @param holder
 	 * @param balance
@@ -16,13 +23,17 @@ public abstract class Account {
 		this.balance = balance;
 		this.dateOpen = dateOpen;
 	}
-	
+	/**
+	 * constructor for Account Object with only holder information
+	 * 
+	 * @param holder
+	 */
 	public void Account(Profile holder) {
 		this.holder=holder;
 	}
 
 	/**
-	 * 
+	 * getter method to get the Account balance
 	 * 
 	 * @return this.balance
 	 */
@@ -31,18 +42,22 @@ public abstract class Account {
 	}
 
 	/**
+	 * takes money out of an Account
 	 * 
-	 * @param amount refers to
-	 * @return this.balance -= amount
+	 * @param amount refers to amount being taken out of Account
+	 * 
+	 * @return
 	 */
 	public void debit(double amount) {
 		this.balance -= amount;
+		return;
 	}
 
 	/**
+	 * checks if two Account objects are equal to each other in both profile and extended classes
 	 * 
-	 * @param acc
-	 * @return true if or false if
+	 * @param obj refers to Account being passed through
+	 * @return true if Account and Account types are the same or false if otherwise
 	 */
 	public boolean equals(Object obj) {
 		if(obj !=null && obj.getClass()== getClass()) {	
@@ -52,19 +67,20 @@ public abstract class Account {
 	}
 
 	/**
+	 * adds money to an Account
 	 * 
-	 * @param amount
-	 * @return this.balance += amount
+	 * @param amount refers to amount being added to this.Account
+	 * @return
 	 */
 	public void credit(double amount) {
 		this.balance += amount;
+		return;
 	}
 
 	/**
+	 * Prints the Account information in correct format
 	 * 
-	 * 
-	 * @return return this.holder.toString() + this.balance +
-	 *         this.dateOpen.toString()
+	 * @return this.holder.toString() + "* $" + balance + "*" + this.dateOpen.toString()
 	 */
 	@Override
 	public String toString() {
@@ -75,8 +91,6 @@ public abstract class Account {
 	 * 
 	 * 
 	 */
-	// these are TO DO
-
 	public abstract double monthlyInterest();
 
 	/**
@@ -84,16 +98,31 @@ public abstract class Account {
 	 */
 	public abstract double monthlyFee();
 
+	/**
+	 * getter method to get the Account Profile
+	 * 
+	 * @return this.holder
+	 */
 	public Profile getProfile() {
 		return this.holder;
 	}
-
+	/**
+	 * getter method to get the Account date opened
+	 * 
+	 * @return this.dateOpen
+	 */
 	public Date getDateOpen() {
 		return this.dateOpen;
 	}
-
+	/**
+	 * setter method to set the Account balance
+	 * 
+	 * @param newBalance is the Accounts new balance
+	 * @return
+	 */
 	public void setBalance(double newBalance) {
 		this.balance=newBalance;
+		return;
 	}
 
 }

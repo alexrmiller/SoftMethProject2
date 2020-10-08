@@ -1,18 +1,17 @@
-import java.text.DecimalFormat;
-
 /**
+ * Savings class that extends Account Class
+ * 
  * @authorMaudiel Romero , Alex Miller
  *
  */
+import java.text.DecimalFormat;
 public class Savings extends Account {
 	private boolean isLoyal;
 
 	DecimalFormat df = new DecimalFormat("#.##");
 	
-	public Savings(Profile holder) {
-		super.Account(holder);
-	}
 	/**
+	 * Constructor for Savings type Account
 	 * 
 	 * @param holder
 	 * @param balance
@@ -23,20 +22,27 @@ public class Savings extends Account {
 		super.Account(holder, balance, dateOpen);
 		this.isLoyal = isLoyal;
 	}
-
+	/**
+	 * Constructor for Savings type Account with only Profile
+	 * 
+	 * @param holder
+	 */
+	public Savings(Profile holder) {
+		super.Account(holder);
+	}
 
 	/**
+	 * Get's the monthly interest on account based on if loyal or not
 	 * 
-	 * @return SavingsInterest refers monthly intrest of 0.00005416667 or
-	 *         0.0002916667 depending on users loyalty status
+	 * @return 0.00005416667 or 0.0002916667 
 	 */
 	@Override
 	public double monthlyInterest() {
 		if (this.isLoyal == false) {
-			String ret = df.format(this.getBalance() * .0035);
+			String ret = df.format(this.getBalance() * (.0035/12));
 			 return Double.parseDouble(ret);
 		} else {
-			String ret = df.format(this.getBalance() * .0025);
+			String ret = df.format(this.getBalance() * (.0025/12));
 			 return Double.parseDouble(ret);
 		}
 	}
@@ -56,21 +62,11 @@ public class Savings extends Account {
 	}
 
 	/**
-	 * 
-	 * @param profile
-	 * @return
+	 * @return "*Savings*" + super.toString() + "*special Savings account*" if loyal or "*Savings*" + super.toString() + "*" if not
 	 */
 	@Override
 	public String toString() {
 		return isLoyal ? "*Savings*" + super.toString() + "*special Savings account*" : "*Savings*" + super.toString() + "*";
 	}
-/*	
-	@Override
-	public boolean equals(Object obj) {
-		if(obj instanceof Savings) {
-			return super.equals(obj) && this.isLoyal == ((Savings)obj).isLoyal;
-		}
-		return false;
-	}
-*/
+
 }

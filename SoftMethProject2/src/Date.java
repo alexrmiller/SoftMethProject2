@@ -1,5 +1,6 @@
 
-/**
+	/**
+	 * Our own date class, comparable to Date object
 	 * @author Maudiel Romero, Alex Miller
 	 *
 	 */
@@ -14,6 +15,7 @@ public class Date implements Comparable<Date> {
 	DecimalFormat fYear = new DecimalFormat("####");
 
 	/**
+	 * Date Constructor
 	 * 
 	 * @param month
 	 * @param date
@@ -112,7 +114,7 @@ public class Date implements Comparable<Date> {
 			return true;
 		} else if (dateFormat.matches("([0-9]{2})/([0-9]{1})/([0-9]{4})")) {
 			return true;
-		}else if (dateFormat.matches("([0-9]{1})/([0-9]{1})/([0-9]{4})")) {
+		} else if (dateFormat.matches("([0-9]{1})/([0-9]{1})/([0-9]{4})")) {
 			return true;
 		} else {
 			return false;
@@ -133,10 +135,4 @@ public class Date implements Comparable<Date> {
 		}
 	}
 
-//	public static void main(String[] args) {
-//		Date d = new Date(4,30,2020);
-//		
-//		
-//		System.out.println(d.toString());
-//	}
 }

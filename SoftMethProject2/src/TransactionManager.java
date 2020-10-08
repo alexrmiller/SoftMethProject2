@@ -1,27 +1,21 @@
- /**
-	 * @author Maudiel Romero, Alex Miller
-	 *
-	 */
+
+/**
+ * Class that runs the program and functions for driver
+ * 
+ * @author Maudiel Romero, Alex Miller
+ *
+ */
 import java.util.Scanner;
 import java.text.DecimalFormat;
 
 public class TransactionManager {
 
 	Scanner TransactionManager = new Scanner(System.in);
-	// .useDelimiter("\n");
 	AccountDatabase database = new AccountDatabase();
 	DecimalFormat doubleBalance = new DecimalFormat("#.##");
 
-	// THESE MIGHT NOT BE ALLOWED
-	//	String line =TransactionManager.nextLine();
-	//	String[] input = line.split(" ");
-	//	String command = input[0]; 
-	//	char firstChar = input[0].charAt(0);
-	//	char SecondChar = input[0].charAt(1);
-	// boolean bool = input[5];
-	// boolean dog = true;
-
 	/**
+	 * initializes the start of input
 	 * 
 	 * @param profile
 	 * @return
@@ -30,13 +24,14 @@ public class TransactionManager {
 		String line = TransactionManager.nextLine();
 		String[] input = line.split("\\s+");
 		switchstatement(input);
+		return;
 
 	}
 
 	/**
+	 * Switch statement to decide what to do based on command input
 	 * 
-	 * @param abc
-	 * @param arr
+	 * @param arr 
 	 */
 	public void switchstatement(String[] arr) {
 		if (arr[0].length() == 2) {
@@ -113,9 +108,9 @@ public class TransactionManager {
 	}
 
 	/**
+	 * closes account based on information given in arr
 	 * 
 	 * @param arr
-	 * @param s
 	 */
 	public void close(String[] arr) {
 		if (arr.length != 3) {
@@ -154,13 +149,13 @@ public class TransactionManager {
 	}
 
 	/**
+	 * opens account based on information given in arr
 	 * 
 	 * @param arr
-	 * @param s
 	 */
 	public void open(String[] arr) {
 		// make sure it's valid input
-		if (arr.length != 5 && arr.length !=6) {
+		if (arr.length != 5 && arr.length != 6) {
 			System.out.println("invalid input.");
 			run();
 		}
@@ -169,14 +164,14 @@ public class TransactionManager {
 		char type = arr[0].charAt(1);
 		String FirstName = arr[1];
 		String LastName = arr[2];
-		double 	Bal = Double.parseDouble(arr[3]);
+		double Bal = Double.parseDouble(arr[3]);
 		String temp = doubleBalance.format(Bal);
 		double Balance = Double.parseDouble(temp);
 		String[] Date = arr[4].split("/", 3);
-		boolean bool=false;
-		if(arr.length==6) {
-		boolCheck(arr);
-		bool = Boolean.parseBoolean(arr[5].toLowerCase());
+		boolean bool = false;
+		if (arr.length == 6) {
+			boolCheck(arr);
+			bool = Boolean.parseBoolean(arr[5].toLowerCase());
 		}
 
 		Date date = new Date(Integer.parseInt(Date[0]), Integer.parseInt(Date[1]), Integer.parseInt(Date[2]));
@@ -213,6 +208,7 @@ public class TransactionManager {
 	}
 
 	/**
+	 * deposit money (amount in arr[3]) into account given in arr
 	 * 
 	 * @param arr
 	 */
@@ -247,9 +243,9 @@ public class TransactionManager {
 	}
 
 	/**
+	 * withdrawals money (amount in arr[3]) from account given in arr
 	 * 
 	 * @param arr
-	 * @return
 	 */
 	public void withdraw(char type, String[] arr) {
 		if (arr.length == 4) {
@@ -286,9 +282,9 @@ public class TransactionManager {
 	}
 
 	/**
+	 * checks if a number given in arr is a positive double otherwise its invalid input
 	 * 
 	 * @param arr
-	 * @return
 	 */
 	public void PosNum(String[] arr) {
 		try {
@@ -300,18 +296,22 @@ public class TransactionManager {
 			System.out.println("Input data type mismatch.");
 			run();
 		}
-		return;
 	}
-	
+
+	/**
+	 * checks if a boolean given in arr is true or false otherwise its invalid input
+	 * 
+	 * @param arr
+	 */
 	public void boolCheck(String[] arr) {
-		
+
 		String bool = arr[5].toLowerCase();
-		if(bool.equals("false")||bool.equals("true")) {
+		if (bool.equals("false") || bool.equals("true")) {
 			return;
-		}else {
+		} else {
 			System.out.println("Input data type mismatch.");
 			run();
 		}
 	}
-	
+
 }

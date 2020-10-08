@@ -1,3 +1,9 @@
+/**
+ * AccountDatabase class is a container class that holds Accounts in an array.
+ * 
+ * @authorMaudiel Romero , Alex Miller
+ *
+ */
 import java.text.DecimalFormat;
 
 public class AccountDatabase {
@@ -7,11 +13,22 @@ public class AccountDatabase {
 	
 	DecimalFormat df = new DecimalFormat("#.##");
 
+	/**
+	 * constructor for AccountDatabase automatically start with size of 0 and 5 empty spots
+	 *
+	 */
 	public AccountDatabase() {
 		this.accounts = new Account[5];
 		this.size = 0;
 	}
 
+	/**
+	 * finds the given parameter account within the array 
+	 * 
+	 * @param account
+	 * @return i if Account is found at index i or -1 if Account is not found in array
+	 *
+	 */
 	private int find(Account account) {
 		for (int i = 0; i < size; i++) {
 			if (accounts[i].equals(account)) {
@@ -21,20 +38,30 @@ public class AccountDatabase {
 		return -1;
 	}
 
-	// grow the array container
+	/**
+	 * grows the array capacity by 5
+	 *
+	 *@return
+	 *
+	 */
 	private void grow() {
 		Account[] newAcc = new Account[this.accounts.length + 5];
 		for (int i = 0; i < this.accounts.length; i++) {
 			newAcc[i] = accounts[i];
 		}
 		accounts = newAcc;
+		return;
 	}
 
-	// adds the account
+	/**
+	 * Adds Account account to the array of accounts
+	 * 
+	 * @param account
+	 * @return true if added false if account already exists in array
+	 */
 	public boolean add(Account account) {
 		int location = find(account);
 		if (location == -1) {
-			// if found then add the account and grow if needed
 			if (this.size == accounts.length) {
 				grow();
 			}
@@ -42,12 +69,16 @@ public class AccountDatabase {
 			size++;
 			return true;
 		} else {
-			// if not found then return false
 			return false;
 		}
 	}
 
-	// deletes the account if is able to find
+	/**
+	 * Removes Account account from the array of accounts
+	 * 
+	 * @param account
+	 * @return true if account is removed false if account is not in the array
+	 */
 	public boolean remove(Account account) {
 		int location = find(account);
 		if (location != -1) {
@@ -62,7 +93,13 @@ public class AccountDatabase {
 		}
 	}
 
-	// deposit into the account
+	/**
+	 * Adds the amount given to the Account given 
+	 * 
+	 * @param account
+	 * @param amount
+	 * @return true if amount was added false if account doesn't exist in array
+	 */
 	public boolean deposit(Account account, double amount) {
 		int i = find(account);
 		if (i == -1) {
@@ -73,8 +110,13 @@ public class AccountDatabase {
 		}
 	}
 
-	// return 0: withdraw successful, 1: insufficient funds, -1 account doesn't
-	// exist
+	/**
+	 * removes the amount given from the Account given 
+	 * 
+	 * @param account
+	 * @param amount
+	 * @return return 0: withdraw successful, 1: insufficient funds, -1: account doesn't exist in array
+	 */
 	public int withdraw(Account account, double amount) {
 		int i = find(account);
 		if (i == -1) {
@@ -92,7 +134,12 @@ public class AccountDatabase {
 		}
 	}
 
-	public void sortByDateOpen() {
+	/**
+	 * sorts the accounts in the array in descending order according to date open
+	 * 
+	 * @return
+	 */
+	private void sortByDateOpen() {
 		Account account = null;
 		for (int i = 0; i < size; i++) {
 			for (int j = i; j < size; j++) {
@@ -107,12 +154,16 @@ public class AccountDatabase {
 		return;
 	}
 
+	/**
+	 * sorts the accounts in the array in descending order according to date open
+	 * 
+	 * @return
+	 */
 	private void sortByLastName() {
 		Account account = null;
 		for (int i = 0; i < size; i++) {
 			for (int j = i; j < size; j++) {
 				if (accounts[i].getProfile().getLastName().compareTo(accounts[j].getProfile().getLastName()) < 0) {
-					// switch the two
 					account = accounts[i];
 					accounts[i] = accounts[j];
 					accounts[j] = account;
@@ -122,6 +173,12 @@ public class AccountDatabase {
 		return;
 	}
 
+	/**
+	 * prints the accounts in the array in descending order according to accounts' date open
+	 * 
+	 * @return
+	 * 
+	 */
 	public void printByDateOpen() {
 		if(size==0) {
 			System.out.println("Database is empty.");
@@ -143,6 +200,11 @@ public class AccountDatabase {
 		return;
 	}
 
+	/**
+	 * prints the accounts in the array in descending order according to accounts' last name
+	 * 
+	 * @return
+	 */
 	public void printByLastName() {
 		if(size==0) {
 			System.out.println("Database is empty.");
@@ -164,6 +226,11 @@ public class AccountDatabase {
 		return;
 	}
 
+	/**
+	 * prints the accounts in the array in no certain order
+	 * 
+	 * @return
+	 */
 	public void printAccounts() {
 		if(size==0) {
 			System.out.println("Database is empty");
