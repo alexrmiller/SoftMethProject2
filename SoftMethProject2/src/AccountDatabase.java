@@ -111,7 +111,7 @@ public class AccountDatabase {
 		Account account = null;
 		for (int i = 0; i < size; i++) {
 			for (int j = i; j < size; j++) {
-				if (accounts[i].getProfile().getLastName().compareTo(accounts[j].getProfile().getLastName()) == -1) {
+				if (accounts[i].getProfile().getLastName().compareTo(accounts[j].getProfile().getLastName()) < 0) {
 					// switch the two
 					account = accounts[i];
 					accounts[i] = accounts[j];
