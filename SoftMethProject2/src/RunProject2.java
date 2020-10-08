@@ -1,7 +1,7 @@
 /**
-	 * @author Maudiel Romero,  Alex Miller
-	 *
-	 */
+ * @author Maudiel Romero, Alex Miller
+ *
+ */
 public class RunProject2 {
 	/**
 	 * 

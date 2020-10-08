@@ -3,7 +3,7 @@ public abstract class Account {
 	private Profile holder;
 	private double balance;
 	private Date dateOpen;
-	
+
 	/**
 	 * 
 	 * @param holder
@@ -11,10 +11,15 @@ public abstract class Account {
 	 * @param dateOpen
 	 */
 	public void Account(Profile holder, double balance, Date dateOpen) {
-		this.holder=holder;
-		this.balance=balance;
-		this.dateOpen=dateOpen;
+		this.holder = holder;
+		this.balance = balance;
+		this.dateOpen = dateOpen;
 	}
+	
+	public void Account(Profile holder) {
+		this.holder=holder;
+	}
+
 	/**
 	 * 
 	 * 
@@ -23,6 +28,7 @@ public abstract class Account {
 	public double getBalance() {
 		return this.balance;
 	}
+
 	/**
 	 * 
 	 * @param amount refers to
@@ -31,17 +37,19 @@ public abstract class Account {
 	public void debit(double amount) {
 		this.balance -= amount;
 	}
+
 	/**
 	 * 
 	 * @param acc
-	 * @return true if or false if 
+	 * @return true if or false if
 	 */
-	public boolean equals(Account acc) {
-		if(this.holder.equals(acc.holder) && this.balance==acc.balance && this.dateOpen.compareTo(acc.dateOpen)==0) {
-			return true;
+	public boolean equals(Object obj) {
+		if(obj !=null && obj.getClass()== getClass()) {	
+			return this.holder.equals(((Account)obj).holder);
 		}
 		return false;
 	}
+
 	/**
 	 * 
 	 * @param amount
@@ -50,34 +58,41 @@ public abstract class Account {
 	public void credit(double amount) {
 		this.balance += amount;
 	}
+
 	/**
 	 * 
 	 * 
-	 * @return return this.holder.toString() + this.balance + this.dateOpen.toString()
+	 * @return return this.holder.toString() + this.balance +
+	 *         this.dateOpen.toString()
 	 */
 	@Override
 	public String toString() {
-		return this.holder.toString() + this.balance + this.dateOpen.toString();
+		return   this.holder.toString() + "* $" + this.balance + "*" + this.dateOpen.toString() ;
 	}
+
 	/**
 	 * 
 	 * 
 	 */
-	//these are TO DO
-	
+	// these are TO DO
+
 	public abstract double monthlyInterest();
+
 	/**
 	 * 
 	 */
 	public abstract double monthlyFee();
-	
+
 	public Profile getProfile() {
 		return this.holder;
 	}
-	
+
 	public Date getDateOpen() {
 		return this.dateOpen;
 	}
-	
+
+	public void setBalance(double newBalance) {
+		this.balance=newBalance;
+	}
 
 }

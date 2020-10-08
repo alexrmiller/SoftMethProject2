@@ -1,134 +1,138 @@
+
 /**
 	 * @author Maudiel Romero, Alex Miller
 	 *
 	 */
 import java.text.DecimalFormat;
 
-public class Date implements Comparable<Date>{
-	private int  year;
+public class Date implements Comparable<Date> {
+	private int year;
 	private int month;
 	private int day;
-	
-	
+
 	DecimalFormat fOther = new DecimalFormat("#0");
 	DecimalFormat fYear = new DecimalFormat("####");
+
 	/**
 	 * 
 	 * @param month
-	 * @param date 
+	 * @param date
 	 * @param year
 	 */
 	public Date(int month, int date, int year) {
-		this.year=year;
-		this.month=month;
-		this.day=date;
+		this.year = year;
+		this.month = month;
+		this.day = date;
 	}
-	
-	//return 0,-1,1
+
+	// return 0,-1,1
 	/**
 	 * 
 	 * @param date
-	 * @return 1 refers to 
+	 * @return 1 refers to
 	 */
 	@Override
 	public int compareTo(Date date) {
-		if(this.year < date.year) {
+		if (this.year < date.year) {
 			return 1;
-		}
-		else if(this.year>date.year) {
+		} else if (this.year > date.year) {
 			return -1;
-		}
-		else {
-			//same year go to month
-			if(this.month>date.month) {
+		} else {
+			// same year go to month
+			if (this.month > date.month) {
 				return 1;
-			}
-			else if(this.month<date.month) {
+			} else if (this.month < date.month) {
 				return -1;
-			}else {
-				//year and month are the same go to day
-				if(this.day>date.day) {
+			} else {
+				// year and month are the same go to day
+				if (this.day > date.day) {
 					return 1;
-				}else if(this.day<date.day) {
+				} else if (this.day < date.day) {
 					return -1;
-				}
-				else {
-					//they are the same
+				} else {
+					// they are the same
 					return 0;
 				}
 			}
 		}
 	}
-	
-	//mm/dd/yyyy format
+
+	// mm/dd/yyyy format
 	/**
 	 * 
-	 * @return mm/dd/yyyy if date is valid, mm/dd/yyyy "is not valid" refers to date not valid 
+	 * @return mm/dd/yyyy if date is valid, mm/dd/yyyy "is not valid" refers to date
+	 *         not valid
 	 */
 	public String toString() {
-		if(this.isValid()==true) {
-			return fOther.format(this.month) + "/" + fOther.format(this.day) + "/" + fYear.format(this.year);	
-		}	
+		if (this.isValid() == true) {
+			return fOther.format(this.month) + "/" + fOther.format(this.day) + "/" + fYear.format(this.year);
+		}
 		return this.month + "/" + this.day + "/" + this.year + " is not a valid Date";
 	}
-	
-	//TO DO
+
+	// TO DO
 	/**
 	 * 
 	 * @param profile
-	 * @return false refers to day, month, year is invalid, true refers to if day, month, year, is valid
+	 * @return false refers to day, month, year is invalid, true refers to if day,
+	 *         month, year, is valid
 	 */
 	public boolean isValid() {
-		
-		
-		if(this.day > 31 || this.day < 1) {
-			return false; 
-		}else if(this.month > 12 || this.month < 1) {
+
+		if (this.day > 31 || this.day < 1) {
 			return false;
-		}else if(this.year < 1900) {
+		} else if (this.month > 12 || this.month < 1) {
 			return false;
-		}else if(this.checkMatche() == false ) {
+		} else if (this.year < 1900) {
 			return false;
-		}else if (this.month == 2 && this.day > 29) {
+		} else if (this.checkMatche() == false) {
 			return false;
-		}else if (this.evenMonths() == true && this.day > 30) {
-			return false; 
-		}
-		else {
+		} else if (this.month == 2 && this.day > 29) {
+			return false;
+		} else if (this.evenMonths() == true && this.day > 30) {
+			return false;
+		} else {
 			return true;
 		}
 	}
+
 	// this checks if the matches are formated correct using AJEX
-	// 3 different if statements for combinations of  {1} {2} || {2} {1} || {2} {2} parameter for months and days
+	// 3 different if statements for combinations of {1} {2} || {2} {1} || {2} {2}
+	// parameter for months and days
 	/**
 	 * 
-	 * @return true if the day, month, year, mathches mm/dd/yyyy format, false refers if mm/dd/yyyy is not a valid format
+	 * @return true if the day, month, year, mathches mm/dd/yyyy format, false
+	 *         refers if mm/dd/yyyy is not a valid format
 	 */
-	boolean checkMatche(){
+	boolean checkMatche() {
 		String dateFormat = fOther.format(this.month) + "/" + fOther.format(this.day) + "/" + fYear.format(this.year);
 		if (dateFormat.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")) {
 			return true;
-		}else if(dateFormat.matches("([0-9]{1})/([0-9]{2})/([0-9]{4})")) {
+		} else if (dateFormat.matches("([0-9]{1})/([0-9]{2})/([0-9]{4})")) {
 			return true;
-		}else if(dateFormat.matches("([0-9]{2})/([0-9]{1})/([0-9]{4})")) {
+		} else if (dateFormat.matches("([0-9]{2})/([0-9]{1})/([0-9]{4})")) {
 			return true;
-		}else {
+		}else if (dateFormat.matches("([0-9]{1})/([0-9]{1})/([0-9]{4})")) {
+			return true;
+		} else {
 			return false;
 		}
 	}
-	//if the month ends on the 30th it is even
+
+	// if the month ends on the 30th it is even
 	/**
 	 * 
-	 * @return true refers to months that end with 30 days, false refers to the remaider months
+	 * @return true refers to months that end with 30 days, false refers to the
+	 *         remaider months
 	 */
-	boolean evenMonths(){
-		if (this.month == 4 || this.month == 6 || this.month ==9 || this.month == 11) {
+	boolean evenMonths() {
+		if (this.month == 4 || this.month == 6 || this.month == 9 || this.month == 11) {
 			return true;
-		}else {
+		} else {
 			return false;
 		}
 	}
-	
+
 //	public static void main(String[] args) {
 //		Date d = new Date(4,30,2020);
 //		
@@ -136,4 +140,3 @@ public class Date implements Comparable<Date>{
 //		System.out.println(d.toString());
 //	}
 }
-
